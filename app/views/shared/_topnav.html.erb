@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand navbar-light topbar static-top">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <h4><b class="dash-b"><%= title('') %></b></h4>
+
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Nav Item - Alerts -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">3+</span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                    Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                            <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 12, 2019</div>
+                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-success">
+                            <i class="fas fa-donate text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 7, 2019</div>
+                        $290.29 has been deposited into your account!
+                    </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+            </div>
+        </li>
+
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <% if current_user.image.blank? || !valid_url?(current_user.image) %>
+                    <span class="avatar bg-primary mr-2"><%= current_user.name.first %></span>
+                <% else %>
+                    <%= image_tag(current_user.image, id: "user-image", class: "img-profile rounded-circle mr-2") %>
+                <% end %>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><b class="prof-color"><%= current_user.name %></b></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small sort-icon"><i
+                    class="fas fa-sort-down"></i></span>
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="userDropdown">
+                <%= link_to edit_user_path(current_user), class: "dropdown-item" do %>
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i><%= t("header.dropdown.settings") %>
+                <% end %>
+                <% highest_role = current_user.role %>
+                <% if highest_role.get_permission("can_manage_users") || highest_role.name == "super_admin" %>
+                    <%= link_to admins_path, class: "dropdown-item" do %>
+                        <i class="fas fa-user-tie fa-sm fa-fw mr-2 text-gray-400"></i><%= t("header.dropdown.account_settings") %>
+                    <% end %>
+                <% elsif highest_role.get_permission("can_manage_rooms_recordings") %>
+                    <%= link_to admin_rooms_path, class: "dropdown-item" do %>
+                        <i class="fas fa-user-tie fa-sm fa-fw mr-2 text-gray-400"></i><%= t("header.dropdown.account_settings") %>
+                    <% end %>
+                <% elsif highest_role.get_permission("can_edit_site_settings") %>
+                    <%= link_to admin_site_settings_path, class: "dropdown-item" do %>
+                        <i class="fas fa-user-tie fa-sm fa-fw mr-2 text-gray-400"></i><%= t("header.dropdown.account_settings") %>
+                    <% end %>
+                <% elsif highest_role.get_permission("can_edit_roles") %>
+                    <%= link_to admin_roles_path, class: "dropdown-item" do %>
+                        <i class="fas fa-user-tie fa-sm fa-fw mr-2 text-gray-400"></i><%= t("header.dropdown.account_settings") %>
+                    <% end %>
+                <% end %>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <%= t("header.dropdown.signout") %>
+                </a>
+            </div>
+        </li>
+
+    </ul>
+
+</nav>

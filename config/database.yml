@@ -1,0 +1,31 @@
+default: &default
+    pool: 5
+    timeout: 5000
+
+development:
+    <<: *default
+    adapter: <%= ENV['DB_ADAPTER'] || 'postgresql' %>
+    host: <%= ENV['DB_HOST'] %>
+    port: <%= ENV['DB_PORT'] %>
+    database: <%= ENV['DB_NAME'] || 'db/production/production.postgresql' %>
+    username: <%= ENV['DB_USERNAME'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
+
+test:
+    <<: *default
+    adapter: postgresql
+    host: <%= ENV['DB_HOST'] %>
+    port: <%= ENV['DB_PORT'] %>
+    database: <%= ENV['DB_NAME'] || 'db/production/production.postgresql' %>
+    username: <%= ENV['DB_USERNAME'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
+
+# Use sqlite in production by default. Greenlight supports
+production:
+    <<: *default
+    adapter: <%= ENV['DB_ADAPTER'] || 'postgresql' %>
+    host: <%= ENV['DB_HOST'] %>
+    port: <%= ENV['DB_PORT'] %>
+    database: <%= ENV['DB_NAME'] || 'db/production/production.postgresql' %>
+    username: <%= ENV['DB_USERNAME'] %>
+    password: <%= ENV['DB_PASSWORD'] %>

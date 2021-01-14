@@ -1,0 +1,310 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-9 col-lg-9">
+            <div class="card shadow mb-4">
+
+                <!-- Card Body -->
+                <div class="card-body bg-primary rounded">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="m-0 font-weight-bold text-white">Welcome
+                                    back <%= current_user.first_name %> <%= current_user.last_name %>!</h5>
+                                <h6 class="mt-2 mb-0 font-weight-light text-white">Book meetings with your
+                                    friends,colleagues and clients.</h6>
+                                <h6 class="mt-2 font-weight-light text-white ">Your calendar stays full and
+                                    you stay profuctive</h6>
+
+                                <a href="" data-toggle="modal" data-target="#schedule-meeting-modal" class="btn btn-Secondary bg-white text-black mt-4">
+                                    <b class="meet">SCHEDULE A MEETING</b>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="/img/OBJECTS.png" class="float-right" alt="img">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 pd-l20">
+                    <span>April 2020</span><i class="fa fa-caret-left p-l8"></i><i
+                    class="fa fa-caret-right p-l8"></i>
+                </div>
+                <div class="col-md-4 text-center ">
+                    <span class="prof-color">(IST +07:00) Aisa Pacific</span><i
+                    class="fas fa-sort-down p-l8"></i>
+                </div>
+                <div class="col-md-4 text-right pd-r20">
+                    <i class="fa fa-calendar"></i>
+                </div>
+            </div>
+            <div class="mycal" style="width:100%;"></div>
+
+
+        </div>
+        <div class="col-xl-3 col-lg-3 upcoming-events">
+
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <table class="sch-tabl">
+
+                    <tr>
+                        <th colspan="7"><i class="fa fa-caret-left p-r8"></i>April 2020<i
+                            class="fa fa-caret-right p-l8"></i></th>
+                    </tr>
+
+                    <tr>
+                        <th>Su</th>
+                        <th>Mo</th>
+                        <th>Tu</th>
+                        <th>We</th>
+                        <th>Th</th>
+                        <th>Fr</th>
+                        <th>Sa</th>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+
+                    <tr class="bg-gray">
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td style="background: blue;    width: 31px;
+                            border-radius: 50%;
+                            color: #fff;">11
+                        </td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                    </tr>
+
+                    <tr>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                    </tr>
+
+                    <tr>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                    </tr>
+
+                    <tr class="sch-tb">
+                        <td>29</td>
+                        <td>30</td>
+                        <td>31</td>
+                    </tr>
+
+                </table>
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between sche-p">
+                    <h5 class="m-0 font-weight-bold e33 pd-t20">Upcoming Meetings</h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <h5 class="text-black font-weight-bold"><b class="b66">Company Policy Discussion</b>
+                    </h5>
+                    <h6>28th May 2020, Saturday</h6>
+                    <h6>03:30pm to 04:00pm</h6>
+                    <div class="image-stack">
+                        <div class="image-stack__item image-stack__item--top">
+                            <img src="img/prof3.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--middle">
+                            <img src="img/prof1.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom">
+                            <img src="img/prof2.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom counter">+3 more</div>
+                    </div>
+                    <!-- <h5 class="text-black font-weight-bold">Organised By</h5> -->
+                    <div class="container-fluid p-0">
+                        <div class="row">
+                            <div class="col-md-12 pt-2 pb-2">
+                                <h5 class="new-color">Organized by</h5>
+                            </div>
+
+                            <div class="col-md-2">
+                                <img src="img/bot.png" alt="" class="float-left">
+                            </div>
+                            <div class="col-md-10">
+                                <h6 class="mb-0"><b>John Wrick</b></h6>
+                                <small class="new-color">john@gmail.com</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr class="sidebar-divider">
+
+                    <h5 class="text-black font-weight-bold"><b>Developer Meeting</b> <sup
+                        class="text-danger">Important</sup></h5>
+                    <h6>28th May 2020, Saturday</h6>
+                    <h6>03:30pm to 04:00pm</h6>
+                    <div class="image-stack">
+                        <div class="image-stack__item image-stack__item--top">
+                            <img src="img/prof3.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--middle">
+                            <img src="img/prof1.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom">
+                            <img src="img/prof2.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom counter">+3 more</div>
+                    </div>
+
+                    <div class="container-fluid p-0">
+                        <div class="row">
+                            <div class="col-md-12 pt-2 pb-2">
+                                <h5 class="new-color">Organized by</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <img src="img/bot.png" alt="" class="float-left">
+                            </div>
+
+                            <div class="col-md-10">
+                                <h6 class="mb-0"><b>John Wrick</b></h6>
+                                <small class="new-color">john@gmail.com</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="sidebar-divider">
+
+                    <h5 class="text-black font-weight-bold"><b>Developer Meeting</b> <sup
+                        class="text-danger">Important</sup></h5>
+                    <h6>28th May 2020, Saturday</h6>
+                    <h6>03:30pm to 04:00pm</h6>
+                    <div class="image-stack">
+                        <div class="image-stack__item image-stack__item--top">
+                            <img src="img/prof3.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--middle">
+                            <img src="img/prof1.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom">
+                            <img src="img/prof2.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom counter">+3 more</div>
+                    </div>
+
+
+                    <div class="container-fluid p-0">
+                        <div class="row">
+                            <div class="col-md-12 pt-2 pb-2">
+                                <h5 class="new-color">Organized by</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <img src="img/bot.png" alt="" class="float-left">
+                            </div>
+
+                            <div class="col-md-10">
+                                <h6 class="mb-0"><b>John Wrick</b></h6>
+                                <small class="new-color">john@gmail.com</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="sidebar-divider">
+
+                    <h5 class="text-black font-weight-bold"><b>Testers Meeting</b>
+                        <sup class="text-danger">Important</sup>
+                    </h5>
+                    <h6>28th May 2020, Saturday</h6>
+                    <h6>03:30pm to 04:00pm</h6>
+                    <div class="image-stack">
+                        <div class="image-stack__item image-stack__item--top">
+                            <img src="img/prof3.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--middle">
+                            <img src="img/prof1.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom">
+                            <img src="img/prof2.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom counter">+3 more</div>
+                    </div>
+
+
+                    <div class="container-fluid p-0">
+                        <div class="row">
+                            <div class="col-md-12 pt-2 pb-2">
+                                <h5 class="new-color">Organized by</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <img src="img/bot.png" alt="" class="float-left">
+                            </div>
+
+                            <div class="col-md-10">
+                                <h6 class="mb-0"><b>John Wrick</b></h6>
+                                <small class="new-color">john@gmail.com</small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <hr class="sidebar-divider">
+
+                    <h5 class="text-black font-weight-bold"><b>Designer Meeting</b> <sup
+                        class="text-danger">Important</sup></h5>
+                    <h6>28th May 2020, Saturday</h6>
+                    <h6>03:30pm to 04:00pm</h6>
+                    <div class="image-stack">
+                        <div class="image-stack__item image-stack__item--top">
+                            <img src="img/prof3.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--middle">
+                            <img src="img/prof1.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom">
+                            <img src="img/prof2.png" alt="">
+                        </div>
+                        <div class="image-stack__item image-stack__item--bottom counter">+3 more</div>
+                    </div>
+
+
+                    <div class="container-fluid p-0">
+                        <div class="row">
+                            <div class="col-md-12 pt-2 pb-2">
+                                <h5 class="new-color">Organized by</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <img src="img/bot.png" alt="" class="float-left">
+                            </div>
+
+                            <div class="col-md-10">
+                                <h6 class="mb-0"><b>John Wrick</b></h6>
+                                <small class="new-color">john@gmail.com</small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= render 'shared/modals/schedule_meeting' %>

@@ -1,0 +1,17 @@
+<ul class="nav nav-pills nav-fill mb-4">
+    <li class="nav-item">
+        <a class="nav-link <%= params[:action] == 'edit' ? 'active' : '' %>" href="<%= edit_user_path(current_user) %>">Account Settings</a>
+    </li>
+    <% if current_user.greenlight_account? %>
+        <li class="nav-item">
+            <%= link_to change_password_path, class: "nav-link #{"active" if active_page == "change_password"}" do %>
+                <%= t("settings.password.title") %>
+            <% end %>
+        </li>
+    <% end %>
+    <li class="nav-item">
+        <%= link_to delete_account_path, class: "nav-link #{"active" if active_page == "delete_account"}" do %>
+            <%= t("settings.delete.title") %>
+        <% end %>
+    </li>
+</ul>

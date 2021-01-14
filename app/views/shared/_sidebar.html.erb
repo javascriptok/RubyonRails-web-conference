@@ -1,0 +1,53 @@
+<ul class="navbar-nav bg-gradient-default sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <div class="sidebar-brand d-flex align-items-center">
+        <%= link_to (current_user ? home_page : root_path), class: "d-flex align-items-center" do %>
+            <% begin %>
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">LetsMeet</div>
+            <% rescue %>
+                <%= t("administrator.site_settings.branding.invalid") %>
+            <% end %>
+        <% end %>
+        <div class="text-center d-none d-md-inline collapse-btn">
+            <button class="rounded-circle border-0 shadow" id="sidebarToggle"></button>
+        </div>
+    </div>
+
+    <!-- Divider -->
+    <!-- <hr class="sidebar-divider my-0"> -->
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item <%= params[:controller] == 'rooms' && params[:action] == 'show' ? 'border-right-primary' : '' %>">
+        <%= link_to home_page, class: "nav-link" do %>
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        <% end %>
+    </li>
+    <% if current_user.role.get_permission("can_create_rooms") && !current_user.has_role?(:super_admin) && !hide_recording_tables %>
+        <% all_rec_page = params[:controller] == "users" && params[:action] == "recordings" ? "border-right-primary" : "" %>
+        <li class="nav-item <%= all_rec_page %>">
+            <%= link_to get_user_recordings_path(current_user), class: "nav-link" do %>
+                <i class="fa fa-phone"></i>
+                <span>Call History</span>
+            <% end %>
+        </li>
+    <% end %>
+    <% all_schedule_page = params[:controller] == "schedules" && params[:action] == "index" ? "border-right-primary" : "" %>
+    <li class="nav-item <%= all_schedule_page %>">
+        <%= link_to schedules_path, class: "nav-link" do %>
+            <i class="far fa-calendar-alt"></i>
+            <span>Schedule</span>
+        <% end %>
+    </li>
+    <% all_contact_page = params[:controller] == "contacts" && params[:action] == "index" ? "border-right-primary" : "" %>
+    <li class="nav-item <%= all_contact_page %>">
+        <%= link_to contacts_path, class: "nav-link" do %>
+            <i class="far fa-address-book"></i>
+            <span>Contacts</span>
+        <% end %>
+    </li>
+</ul>

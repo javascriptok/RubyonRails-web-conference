@@ -1,0 +1,27 @@
+<div class="card profile">
+    <div class="desc">
+        <% if current_user.image.blank? || !valid_url?(current_user.image) %>
+            <span class="avatar avatar-xxxl bg-primary"><%= current_user.first_name ? current_user.first_name.first : current_user.name.first %></span>
+        <% else %>
+            <%= image_tag(current_user.image, class: "avatar avatar-xxl") %>
+        <% end %>
+        <h3><%= current_user.first_name %> <%= current_user.last_name %></h3>
+        <p class="title"><%= current_user.role.title %></p>
+        <% if current_user.city %>
+            <p class="profile-location"><i class="fas fa-map-marker-alt"></i> <%= current_user.city %></p>
+        <% end %>
+        <div class="contact-info">
+            <p>
+                <a href="#"><%= current_user.email %></a>
+            </p>
+            <% if current_user.phone %>
+                <p><a href="#"><%= current_user.phone %></a></p>
+            <% end %>
+        </div>
+        <div class="about-profile">
+            <p>
+                <%= current_user.bio %>
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <%#= render "shared/components/subtitle", subtitle: t("administrator.title"), search: false %>
+
+    <div class="row">
+        <div class="col-lg-3 mb-4">
+            <%= render "admins/components/menu_buttons" %>
+        </div>
+        <div id="room_configuration" class="col-lg-9">
+            <%= render "admins/components/setting_view", setting_id: "room_settings", setting_title: t("administrator.room_configuration.title"), search: false %>
+        </div>
+    </div>
+</div>

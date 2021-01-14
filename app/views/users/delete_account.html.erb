@@ -1,0 +1,19 @@
+<div class="container-fluid my-profile">
+    <div class="row">
+        <div class="col-md-3">
+            <%= render "users/components/profile" %>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body p-5">
+                    <%= render "users/components/menu_tabs" %>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active">
+                            <%= render "users/components/setting_view", setting_id: "delete", setting_title: t("settings.delete.subtitle") %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

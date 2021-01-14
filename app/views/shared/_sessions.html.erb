@@ -1,0 +1,137 @@
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-lg-12">
+            <!-- Project Card Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h4 class="m-0 font-weight-bold tcolor"><%= title %></h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div id="search-bar" class="d-inline-block float-right">
+                                        <div class="input-group">
+                                            <input id="search-input" type="text" class="form-control" placeholder="<%= t("settings.search") %>..." value="<%= @search %>">
+                                            <% unless @search.blank? %>
+                                                <span id="clear-search" class="text-primary" onclick="clearSearch()"><i class="fas fa-times"></i></span>
+                                            <% end %>
+                                            <span class="input-group-append"><button class="btn btn-outline-primary" type="button" onclick="searchPage()"><i class="fas fa-search"></i></button></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="recordings-table" class="table table-bordered dash-record">
+                            <thead>
+                            <tr>
+                                <th data-header="name" data-order="<%= @order_column == "name" ? @order_direction : "none" %>">
+                                    <%= t("recording.table.name") %>
+                                    <% if @order_column == "name" && @order_direction == "desc" %>
+                                        ↓
+                                    <% elsif @order_column == "name" && @order_direction == "asc" %>
+                                        ↑
+                                    <% end %>
+                                </th>
+                                <% if recording_thumbnails? %>
+                                    <th>
+                                        <%= t("recording.table.thumbnails") %>
+                                    </th>
+                                <% end %>
+                                <th class="text-left" data-header="length" data-order="<%= @order_column == "length" ? @order_direction : "none" %>">
+                                    <%= t("recording.table.length") %>
+                                    <% if @order_column == "length" && @order_direction == "desc" %>
+                                        ↓
+                                    <% elsif @order_column == "length" && @order_direction == "asc" %>
+                                        ↑
+                                    <% end %>
+                                </th>
+                                <th class="text-left" data-header="users" data-order="<%= @order_column == "users" ? @order_direction : "none" %>">
+                                    <%= t("recording.table.users") %>
+                                    <% if @order_column == "users" && @order_direction == "desc" %>
+                                        ↓
+                                    <% elsif @order_column == "users" && @order_direction == "asc" %>
+                                        ↑
+                                    <% end %>
+                                </th>
+                                <th class="text-left" data-header="visibility" data-order="<%= @order_column == "visibility" ? @order_direction : "none" %>">
+                                    <%= t("recording.table.visibility") %>
+                                    <% if @order_column == "visibility" && @order_direction == "desc" %>
+                                        ↓
+                                    <% elsif @order_column == "visibility" && @order_direction == "asc" %>
+                                        ↑
+                                    <% end %>
+                                </th>
+                                <th data-header="formats" data-order="<%= @order_column == "formats" ? @order_direction : "none" %>">
+                                    <%= t("recording.table.formats") %>
+                                    <% if @order_column == "formats" && @order_direction == "desc" %>
+                                        ↓
+                                    <% elsif @order_column == "formats" && @order_direction == "asc" %>
+                                        ↑
+                                    <% end %>
+                                </th>
+                                <% unless only_public %>
+                                    <th class="text-center"><i class="icon-settings"></i></th>
+                                <% end %>
+                            </tr>
+                            </thead>
+                            <tbody id="recording-table">
+                            <tr id="no_recordings_found" style="display: none;">
+                                <td colspan="7" class="text-center h4 p-6 font-weight-normal">
+                                    <%= t("recording.no_matched_recordings", inject: only_public ? t("recording.visibility.public").downcase + " " : "") %>
+                                </td>
+                            </tr>
+                            <% if recordings.empty? %>
+                                <tr>
+                                    <td colspan="7" class="text-center h4 p-6 font-weight-normal">
+                                        <% if user_recordings %>
+                                            <%= t("recording.no_user_recordings") %>
+                                        <% else %>
+                                            <%= t("recording.no_recordings", inject: only_public ? t("recording.visibility.public").downcase + " " : "") %>
+                                        <% end %>
+                                    </td>
+                                </tr>
+                            <% else %>
+                                <% failed_recordings = 0 %>
+                                <% recordings.each do |recording| %>
+                                    <% begin %>
+                                        <% if only_public || (defined?(shared_room) && shared_room) %>
+                                            <%= render "shared/components/public_recording_row", recording: recording %>
+                                        <% else %>
+                                            <%= render "shared/components/recording_row", recording: recording %>
+                                        <% end %>
+                                    <% rescue => e %>
+                                        <% logger.error "Error retrieving recording #{recording[:meetingID]}: #{e} -> #{e.backtrace[0]}" %>
+                                        <% failed_recordings += 1 %>
+                                    <% end %>
+                                <% end %>
+
+                                <% if failed_recordings > 0 %>
+                                    <div class="alert alert-danger alert-dismissible text-center mb-0">
+                                        <%= t("recording.error", count: failed_recordings) %>
+                                    </div>
+                                <% end %>
+                            <% end %>
+                            </tbody>
+                        </table>
+                        <% if !recordings.empty? %>
+                            <div class="float-md-right mt-4">
+                                <%== pagy_bootstrap_nav(pagy) %>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%= render "shared/modals/delete_recording_modal" %>

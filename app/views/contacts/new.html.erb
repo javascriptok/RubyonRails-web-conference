@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Add New Contact
+                </div>
+                <div class="card-body">
+                    <%= form_for @contact, url: new_contact_path, method: :post do |f| %>
+                        <div class="form-group">
+                            <%= f.label :first_name, "First name" %>
+                            <%= f.text_field :first_name, class: "form-control #{form_is_invalid?(@contact, :first_name)}", placeholder: 'First Name', required: true %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :last_name, "Last name" %>
+                            <%= f.text_field :last_name, class: "form-control #{form_is_invalid?(@contact, :last_name)}", placeholder: 'Last Name', required: true %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :email, "Email Address" %>
+                            <%= f.email_field :email, class: "form-control #{form_is_invalid?(@contact, :email)}", placeholder: 'Email', required: true %>
+                            <% if @contact.errors[:email][0] %>
+                                <small class="text-danger">Email <%= @contact.errors[:email][0] %></small>
+                            <% end %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :company, "Company" %>
+                            <%= f.text_field :company, class: "form-control #{form_is_invalid?(@contact, :company)}", placeholder: 'Company' %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :department, "Department" %>
+                            <%= f.text_field :department, class: "form-control #{form_is_invalid?(@contact, :department)}", placeholder: 'Department' %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :phone1, "Phone 1" %>
+                            <%= f.text_field :phone1, class: "form-control #{form_is_invalid?(@contact, :phone1)}", placeholder: 'Phone 1' %>
+                            <% if @contact.errors[:phone1][0] %>
+                                <small class="text-danger">Phone 1 <%= @contact.errors[:phone1][0] %></small>
+                            <% end %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :phone2, "Phone 2" %>
+                            <%= f.text_field :phone2, class: "form-control #{form_is_invalid?(@contact, :phone2)}", placeholder: 'Phone 2' %>
+                            <% if @contact.errors[:phone2][0] %>
+                                <small class="text-danger">Phone 2 <%= @contact.errors[:phone2][0] %></small>
+                            <% end %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :notes, "Notes" %>
+                            <%= f.text_area :notes, class: "form-control #{form_is_invalid?(@contact, :notes)}", placeholder: 'Notes' %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :custom_field1, "Custom Field 1" %>
+                            <%= f.text_area :custom_field1, class: "form-control #{form_is_invalid?(@contact, :custom_field1)}", placeholder: 'Custom Field 1' %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :custom_field2, "Custom Field 2" %>
+                            <%= f.text_area :custom_field2, class: "form-control #{form_is_invalid?(@contact, :custom_field2)}", placeholder: 'Custom Field 2' %>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary">Save</button>
+                            <button class="btn btn-secondary" type="reset">Cancel</button>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

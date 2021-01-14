@@ -1,0 +1,144 @@
+<div id="schedule-meeting-modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Schedule a meeting</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="schedule-meeting">
+                <%#= form_with(url: store_schedule_path, method: :post, "@submit.prevent": "handleSubmit", local: false) do |form| %>
+                <form method="post" action="<%= store_schedule_path %>" @submit.prevent="handleSubmit">
+                    <input id="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                    <div class="form-group">
+                        <input type="text" class="form-control" v-model="title" placeholder="Daily design meeting- meeting room no 1">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <input type="date" class="form-control" :disabled="repeat_weekly" :required="!repeat_weekly" v-model="start_date" placeholder="Start date">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date" class="form-control" :disabled="repeat_weekly" :required="!repeat_weekly" v-model="end_date" placeholder="End date">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="time" class="form-control" :disabled="all_day" :required="!all_day" v-model="start_time" placeholder="Start time">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="time" class="form-control" :disabled="all_day" :required="!all_day" v-model="end_time" placeholder="End time">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="all-day" v-model="all_day">
+                            <label class="custom-control-label" for="all-day">All day</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="repeat-weekly" v-model="repeat_weekly">
+                            <label class="custom-control-label" for="repeat-weekly">Repeat on weekly</label>
+                        </div>
+                        <select class="custom-select w-auto" id="week-day" :disabled="!repeat_weekly" v-model="repeat_day">
+                            <option value="0">Sunday</option>
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">Wednesday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Events</label>
+                        <div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" v-model="mute_video" id="video-checkbox">
+                                <label class="custom-control-label" for="video-checkbox">Mute Video</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" v-model="mute_audio" id="audio-checkbox">
+                                <label class="custom-control-label" for="audio-checkbox">Mute Audio</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" v-model="record_meeting" id="record-checkbox">
+                                <label class="custom-control-label" for="record-checkbox">Record Meeting</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" v-model="description" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <label class="col-form-label col-md-3">Events Tag</label>
+                        <div class="col-md-9">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" v-model="event_tags" value="important" id="important-checkbox">
+                                <label class="custom-control-label" for="important-checkbox">Important</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" v-model="event_tags" value="normal" id="normal-checkbox">
+                                <label class="custom-control-label" for="normal-checkbox">Normal</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" v-model="event_tags" value="general" id="general-checkbox">
+                                <label class="custom-control-label" for="general-checkbox">General</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <label class="col-form-label col-md-3">Notification</label>
+                        <div class="col-md-9">
+                            <select class="custom-select w-auto mr-2" v-model="notification_type">
+                                <option>Email</option>
+                                <option>SMS</option>
+                            </select>
+                            <select class="custom-select w-auto mr-2" v-model="notification_minutes">
+                                <option value="10">10 Minutes</option>
+                                <option value="20">20 Minutes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Add Guest</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" v-model="guest_name" placeholder="Enter guest Email or Name">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" @click="handleAddGuest">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span v-for="(guest, index) in guests" class="avatar bg-primary mr-2" @click="removeGuest(index)">
+                            {{ guest[0] }}
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Guest can</label>
+                        <div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="everyone-admin" v-model="everyone_as_admin">
+                                <label class="custom-control-label" for="everyone-admin">Everyone as admin</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="modify-meeting" v-model="modify_meeting">
+                                <label class="custom-control-label" for="modify-meeting">Modify Meeting</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="invite-others" v-model="invite_others">
+                                <label class="custom-control-label" for="invite-others">Invite others</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="see-guest-list" v-model="see_guest_list">
+                                <label class="custom-control-label" for="see-guest-list">See guest list</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-right">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary">Schedule</button>
+                    </div>
+                </form>
+                <%# end %>
+            </div>
+        </div>
+    </div>
+</div>

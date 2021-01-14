@@ -1,0 +1,58 @@
+<% readonly = !can_edit_user?(@user, current_user) %>
+
+<%= form_for @user, url: update_user_path, method: :post do |f| %>
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <%= f.label :first_name, "First name" %>
+            <%= f.text_field :first_name, class: "form-control #{form_is_invalid?(@user, :first_name)}", placeholder: 'First Name', readonly: readonly, required: true %>
+        </div>
+        <div class="col-sm-6">
+            <%= f.label :last_name, "Last name" %>
+            <%= f.text_field :last_name, class: "form-control #{form_is_invalid?(@user, :last_name)}", placeholder: 'Last Name', readonly: readonly, required: true %>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <%= f.label :phone, "Phone Number" %>
+            <%= f.text_field :phone, class: "form-control #{form_is_invalid?(@user, :phone)}", placeholder: 'Phone Number', readonly: readonly, required: true %>
+        </div>
+        <div class="col-sm-6">
+            <%= f.label :email, t("email") %>
+            <%= f.email_field :email, class: "form-control #{form_is_invalid?(@user, :email)}", required: true, placeholder: t("email"), readonly: readonly %>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <%= f.label :city, "City" %>
+            <%= f.text_field :city, class: "form-control #{form_is_invalid?(@user, :city)}", placeholder: 'City', readonly: readonly %>
+        </div>
+        <div class="col-sm-6">
+            <%= f.label :state, "State" %>
+            <%= f.text_field :state, class: "form-control #{form_is_invalid?(@user, :state)}", placeholder: 'State', readonly: readonly %>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <%= f.label :postal_code, "Postal code" %>
+            <%= f.text_field :postal_code, class: "form-control #{form_is_invalid?(@user, :postal_code)}", placeholder: 'Postal code', readonly: readonly %>
+        </div>
+        <div class="col-sm-6">
+            <%= f.label :country, "Country" %>
+            <%= f.text_field :country, class: "form-control #{form_is_invalid?(@user, :country)}", placeholder: 'Country', readonly: readonly %>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <%= f.label :bio, "Bio" %>
+            <%= f.text_area :bio, class: "form-control #{form_is_invalid?(@user, :bio)}", placeholder: 'Bio', readonly: readonly %>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">
+            UPDATE
+        </button>
+        <button type="reset" class="btn btn-secondary">
+            RESET
+        </button>
+    </div>
+<% end %>
